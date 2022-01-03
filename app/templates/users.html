@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Blogstock - Users{% endblock %}
+
+{% block content %}
+    <section class="container">
+        <h2>Users</h2>
+        <div class="row mt-4">
+            {% if users %}
+                {% for user in users  %}
+                    <div class="card col-md-4">
+                        <div class="card-body">
+                            <h5 class="card-title">User nº{{ user.id }}: 
+                                <strong>{{ user.username }}</strong>
+                            </h5>
+                            <p class="card-text">Email: <strong>{{ user.email }}</strong></p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                    <div class="alert alert-info" role="alert">
+                        No users available
+                    </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

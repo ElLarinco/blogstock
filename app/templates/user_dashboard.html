@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Blogstock{% endblock %}
+
+{% block content %}
+    <section class="shadow-lg p-3 mb-5 bg-body rounded">
+        <h2>User Description</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ user.username }}</h5>
+                <p class="card-text">{{ user.email }}</p>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <form class="shadow-lg p-3 mb-5 bg-body rounded" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" id="title" placeholder="Enter a title..." class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Content</label>
+            <textarea name="content" id="content" rows="5" placeholder="Enter content..." class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" type="submit">Create Post</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Blogstock - Posts{% endblock %}
+
+{% block content %}
+    <section class="container">
+        <h2>Posts</h2>
+        <div class="row mt-4">
+            {% if posts %}
+                {% for post in posts  %}
+                    <div class="card col-md-4">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <strong>Post nº{{ post.id }}:</strong> 
+                                {{ post.title }}
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <strong>Hecho por:</strong> {{ post.author_username }}
+                            </h6>
+                            <p class="card-text">
+                                {{ post.content }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                    <div class="alert alert-info" role="alert">
+                        No posts available
+                    </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

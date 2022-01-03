@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+    <header class="border-bottom">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{ url_for('views.home_page') }}">Blogstock</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a href="{{ url_for('views.posts_page') }}" class="nav-link">Posts</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url_for('views.users_page') }}" class="nav-link">Users</a>
+              </li>
+            </ul>
+            <div>
+              {% if user.is_authenticated %}
+                <button type="button" class="btn btn-secondary me-2">
+                  <a class="text-light text-decoration-none" href="{{ url_for('views.user_dashboard_page') }}">{{user.username.title()}}</a>
+                </button>
+                <button type="button" class="btn btn-danger">
+                  <a class="text-light text-decoration-none" href="{{ url_for('auth.logout') }}">Logout</a>
+                </button>
+              {% else %}
+                <button type="button" class="btn btn-success me-2">
+                  <a class="text-light text-decoration-none" href="{{ url_for('auth.login_page') }}">Login</a>
+                </button>
+                <button type="button" class="btn btn-primary">
+                  <a class="text-light text-decoration-none" href="{{ url_for('auth.register_page') }}">Register</a>
+                </button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container mt-4">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if category == "error"%}
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+              </div>
+            {% else %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block content %}
+      {% endblock %}
+    </main>
+    <footer class="bg-light text-center text-lg-start">
+        <div class="text-center p-3">
+          © 2022 Copyright:
+          <a class="text-decoration-none" href="">Blogstock</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

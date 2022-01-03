@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Blogstock{% endblock %}
+
+{% block content %}
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Un sitio para opinar</h1>
+        <p class="col-md-8 fs-4">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia ipsa eum quae voluptas suscipit error laboriosam, tempora inventore. Facere quis aut commodi, nemo numquam in possimus ea? Eius, et? Accusantium?
+        </p>
+        <button class="btn btn-primary btn-lg" type="button">
+            <a class="text-light text-decoration-none" href="{{ url_for('views.posts_page') }}">
+                Ver posts
+            </a>
+        </button>
+        </div>
+    </div>
+{% endblock %}
